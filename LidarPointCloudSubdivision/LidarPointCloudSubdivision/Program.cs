@@ -9,11 +9,14 @@ namespace LidarPointCloudSubdivision
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Begin time:" + DateTime.Now);
+            var startTime = DateTime.Now;
+
             var lasReader = new laszip_dll();
             var compressed = true;
 
             lasReader.laszip_open_reader("2743_1234.las", ref compressed);
+
+            var pointsCount = lasReader.header.number_of_point_records;
 
             var min = new Point()
             {
@@ -62,14 +65,17 @@ namespace LidarPointCloudSubdivision
                 }
             }
 
-            //for (int pointIndex = 0; pointIndex < 10; pointIndex++)
-            //{
-            //    var coordArray = new double[3];
-            //    lasReader.laszip_read_point();
-            //    lasReader.laszip_get_coordinates(coordArray);
-            //    Console.WriteLine($"Point: . X: {coordArray[0]} Y: {coordArray[1]} Z: {coordArray[2]}");
-            //}
+            for (int pointIndex = 0; pointIndex < pointsCount; pointIndex++)
+            {
+                var coordArray = new double[3];
+                lasReader.laszip_read_point();
+                lasReader.laszip_get_coordinates(coordArray);
+                Console.WriteLine($"Point: {pointIndex}. X: {coordArray[0]} Y: {coordArray[1]} Z: {coordArray[2]}");
+            }
 
+            Console.WriteLine($"Start time: {startTime}");
+            Console.WriteLine($"EndTime: {DateTime.Now}");
+            Console.WriteLine($"Total time app was running: {DateTime.Now.Subtract(startTime)}");
             lasReader.laszip_close_reader();
         }
     }
