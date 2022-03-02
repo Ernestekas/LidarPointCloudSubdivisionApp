@@ -7,10 +7,7 @@ namespace LidarPointCloudSubdivision.Services
     {
         public Octree Create(List<Point> points)
         {
-            var octree = new Octree
-            {
-
-            };
+            
         }
     }
 }

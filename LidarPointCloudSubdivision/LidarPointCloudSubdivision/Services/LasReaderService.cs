@@ -66,7 +66,8 @@ namespace LidarPointCloudSubdivision.Services
 
             return new Point[] 
             { 
-                minPoint, maxPoint 
+                minPoint, 
+                maxPoint 
             };
         }
     }
