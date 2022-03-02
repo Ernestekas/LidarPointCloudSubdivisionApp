@@ -1,4 +1,5 @@
-﻿using LidarPointCloudSubdivision.Services;
+﻿using LidarPointCloudSubdivision.Repositories;
+using LidarPointCloudSubdivision.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LidarPointCloudSubdivision
@@ -10,6 +11,7 @@ namespace LidarPointCloudSubdivision
             services.AddTransient<ConsoleService>();
             services.AddTransient<LasReaderService>();
             services.AddTransient<OctreeService>();
+            services.AddTransient<OctreeRepository>();
         }
     }
 }
