@@ -1,13 +1,16 @@
-﻿using System;
+﻿using LidarPointCloudSubdivision.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LidarPointCloudSubdivision.Services
 {
     public class OctreeService
     {
-        
+        public Octree Create(List<Point> points)
+        {
+            var octree = new Octree
+            {
+
+            };
+        }
     }
 }

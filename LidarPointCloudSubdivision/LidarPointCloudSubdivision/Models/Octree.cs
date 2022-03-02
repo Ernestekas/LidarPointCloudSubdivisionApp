@@ -8,6 +8,8 @@ namespace LidarPointCloudSubdivision.Models
 {
     public class Octree
     {
-        public int MyProperty { get; set; }
+        public double MinCoordinate { get; set; }
+        public double MaxCoordinate { get; set; }
+        public Octan[,,] octans { get; set; } = new Octan[2, 2, 2];
     }
 }
