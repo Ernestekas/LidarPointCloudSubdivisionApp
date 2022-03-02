@@ -69,6 +69,11 @@ namespace LidarPointCloudSubdivision.Services
             };
         }
 
+        private Octan FormChildOctan_Test(int z, int y, int x, Octan parent)
+        {
+
+        }
+
         private int GetPointCountInOctan(Octan octan, List<Point> points)
         {
             List<Point> pointsInOctan = points
