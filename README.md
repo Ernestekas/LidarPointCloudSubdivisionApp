@@ -3,7 +3,7 @@
 Descritpion
 --------------------
 This application read point cloud file (.las format), then subdivides space using octree and returns octree.json with octree object. After stage 3 octree will be saved into a octree.json which will be located in:
-project folder > LidarPointCloudSubdivision > bin > Debug > net5.0 > Data folder.
+project folder / LidarPointCloudSubdivision / bin / Debug / net5.0 / Data / octree.json
 
 Requirements
 --------------------
