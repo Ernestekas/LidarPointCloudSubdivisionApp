@@ -6,7 +6,7 @@ namespace LidarPointCloudSubdivision.Repositories
 {
     public class OctreeRepository
     {
-        private readonly string _octreeDataFile = "octree.json";
+        private readonly string _octreeDataFile = "Data/octree.json";
 
         public OctreeRepository()
         {

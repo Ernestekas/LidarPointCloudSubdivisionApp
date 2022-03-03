@@ -12,7 +12,7 @@ namespace LidarPointCloudSubdivision.Services
 
         public LasReaderService()
         {
-            _defaultFile = "2743_1234.las";
+            _defaultFile = "Data/input.las";
             _reader = new laszip_dll();
             _compressed = true;
         }

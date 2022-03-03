@@ -1,11 +1,7 @@
-﻿using LidarPointCloudSubdivision.ConsoleApp;
-using LidarPointCloudSubdivision.Models;
+﻿using LidarPointCloudSubdivision.Models;
 using LidarPointCloudSubdivision.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LidarPointCloudSubdivision.Services
 {
@@ -60,6 +56,7 @@ namespace LidarPointCloudSubdivision.Services
         private List<Point> RunStageOne_ReadPoints()
         {
             var startTime = DateTime.Now;
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine("Stage 1: BEGIN...");
             Console.WriteLine("Reading points from file...");
@@ -72,6 +69,7 @@ namespace LidarPointCloudSubdivision.Services
             Console.WriteLine($"Stage 1: Time spent reading points: {DateTime.Now.Subtract(startTime)}");
             Console.WriteLine($"Total points: {points.Count}");
             Console.WriteLine();
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
 
             return points;
@@ -80,7 +78,7 @@ namespace LidarPointCloudSubdivision.Services
         private Octan RunStageTwo_Subdivide(List<Point> points)
         {
             var startTime = DateTime.Now;
-
+            Console.Clear();
             Console.WriteLine();
             Console.WriteLine("Stage 2: BEGIN...");
             Console.WriteLine("Subdividing Point Cloud...");
@@ -90,12 +88,12 @@ namespace LidarPointCloudSubdivision.Services
             Console.WriteLine("Stage 2: FINISHED...");
             Console.WriteLine($"Stage 2 proccess time: {DateTime.Now.Subtract(startTime)}");
             Console.WriteLine();
-            Console.ReadKey();
             return octan;
         }
 
         private bool PreStageTwo_CheckUserAction(List<Point> points)
         {
+            Console.Clear();
             bool endApplication = false;
             bool run = true;
             while (run)
@@ -114,7 +112,8 @@ namespace LidarPointCloudSubdivision.Services
                         Console.ReadKey();
 
                         StageThree_WriteOctreeToJson(octan);
-
+                        run = false;
+                        endApplication = true;
                         break;
                     case "2":
                         endApplication = true;
@@ -130,6 +129,7 @@ namespace LidarPointCloudSubdivision.Services
 
         private void StageThree_WriteOctreeToJson(Octan octan)
         {
+            Console.Clear();
             var startTime = DateTime.Now;
             Console.WriteLine("Stage 3: BEGIN...");
             Console.WriteLine("Writing octree into a file...");

@@ -56,15 +56,15 @@ namespace LidarPointCloudSubdivision.Services
             {
                 MinCoordinate = new Point
                 {
-                    X = parent.MinCoordinate.X + parent.MaxCoordinate.X / 2 * x,
-                    Y = parent.MinCoordinate.Y + parent.MaxCoordinate.Y / 2 * y,
-                    Z = parent.MinCoordinate.Z + parent.MaxCoordinate.Z / 2 * z
+                    X = parent.MinCoordinate.X + (parent.MaxCoordinate.X - parent.MinCoordinate.X) / 2 * x,
+                    Y = parent.MinCoordinate.Y + (parent.MaxCoordinate.Y - parent.MinCoordinate.Y) / 2 * y,
+                    Z = parent.MinCoordinate.Z + (parent.MaxCoordinate.Z - parent.MinCoordinate.Z) / 2 * z
                 },
-                MaxCoordinate = new Point()
+                MaxCoordinate = new Point
                 {
-                    X = (parent.MaxCoordinate.X + parent.MaxCoordinate.X * x) / 2,
-                    Y = (parent.MaxCoordinate.Y + parent.MaxCoordinate.Y * y) / 2,
-                    Z = (parent.MaxCoordinate.Z + parent.MaxCoordinate.Z * z) / 2
+                    X = parent.MinCoordinate.X + (parent.MaxCoordinate.X - parent.MinCoordinate.X) / 2 + (parent.MaxCoordinate.X - parent.MinCoordinate.X) / 2 * x,
+                    Y = parent.MinCoordinate.Y + (parent.MaxCoordinate.X - parent.MaxCoordinate.Y) / 2 + (parent.MaxCoordinate.Y - parent.MinCoordinate.Y) / 2 * y,
+                    Z = parent.MaxCoordinate.Z + (parent.MaxCoordinate.Z - parent.MaxCoordinate.Z) / 2 + (parent.MaxCoordinate.Z - parent.MinCoordinate.Z) / 2 * z
                 }
             };
         }
