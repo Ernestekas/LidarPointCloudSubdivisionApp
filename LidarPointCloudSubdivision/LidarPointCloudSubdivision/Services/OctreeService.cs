@@ -6,7 +6,7 @@ namespace LidarPointCloudSubdivision.Services
 {
     public class OctreeService
     {
-        private readonly int _maxDepth = 5;
+        private const int _maxDepth = 5;
         private readonly LasReaderService _lasReaderService;
 
         public OctreeService(LasReaderService lasReaderService)

@@ -10,12 +10,14 @@ namespace LidarPointCloudSubdivision.Services
         private readonly LasReaderService _lasReaderService;
         private readonly OctreeService _octreeService;
         private readonly OctreeRepository _octreeRepository;
+        private readonly OctreeElipsoidService _octreeElipsoidService;
 
-        public ConsoleService(LasReaderService lasReaderService, OctreeService octreeService, OctreeRepository octreeRepository)
+        public ConsoleService(LasReaderService lasReaderService, OctreeService octreeService, OctreeRepository octreeRepository, OctreeElipsoidService octreeElipsoidService)
         {
             _lasReaderService = lasReaderService;
             _octreeService = octreeService;
             _octreeRepository = octreeRepository;
+            _octreeElipsoidService = octreeElipsoidService;
         }
 
         public void Run()
@@ -75,16 +77,25 @@ namespace LidarPointCloudSubdivision.Services
             return points;
         }
 
-        private Octan RunStageTwo_Subdivide(List<Point> points)
+        private Octan RunStageTwo_Subdivide(List<Point> points, bool filterByEllipsoid = false)
         {
             var startTime = DateTime.Now;
+            var octan = new Octan();
+
             Console.Clear();
             Console.WriteLine();
             Console.WriteLine("Stage 2: BEGIN...");
             Console.WriteLine("Subdividing Point Cloud...");
 
-            var octan = _octreeService.SubdividePointCloud(points);
-
+            if (filterByEllipsoid)
+            {
+                octan = _octreeElipsoidService.SubdividePointCloud(points);
+            }
+            else
+            {
+                octan = _octreeService.SubdividePointCloud(points);
+            }
+            
             Console.WriteLine("Stage 2: FINISHED...");
             Console.WriteLine($"Stage 2 proccess time: {DateTime.Now.Subtract(startTime)}");
             Console.WriteLine();
@@ -100,7 +111,8 @@ namespace LidarPointCloudSubdivision.Services
             {
                 Console.WriteLine("Select an action by entering option number:");
                 Console.WriteLine("1 - Begin Subdivision proccess.");
-                Console.WriteLine("2 - Exit an application.");
+                Console.WriteLine("2 - Begin Subdivision proccess (Point check in octan ellipsoid)");
+                Console.WriteLine("3 - Exit an application.");
 
                 string action = Console.ReadLine();
                 switch (action)
@@ -116,6 +128,16 @@ namespace LidarPointCloudSubdivision.Services
                         endApplication = true;
                         break;
                     case "2":
+                        var octanEll = RunStageTwo_Subdivide(points, true);
+
+                        Console.WriteLine("Press any key to continue writing octree to file...");
+                        Console.ReadKey();
+
+                        StageThree_WriteOctreeToJson(octanEll);
+                        run = false;
+                        endApplication = true;
+                        break;
+                    case "3":
                         endApplication = true;
                         break;
                     default:

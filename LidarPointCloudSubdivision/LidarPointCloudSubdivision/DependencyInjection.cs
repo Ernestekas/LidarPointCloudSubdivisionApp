@@ -12,6 +12,7 @@ namespace LidarPointCloudSubdivision
             services.AddTransient<LasReaderService>();
             services.AddTransient<OctreeService>();
             services.AddTransient<OctreeRepository>();
+            services.AddTransient<OctreeElipsoidService>();
         }
     }
 }

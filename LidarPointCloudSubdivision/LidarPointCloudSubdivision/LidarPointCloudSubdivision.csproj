@@ -12,10 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="Data\input.las">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
